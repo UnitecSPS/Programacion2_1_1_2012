@@ -15,4 +15,10 @@ public class CuentaAhorro extends CuentaBancaria {
         super(cod,n,1000);
         activo = true;
     }
+    
+    @Override
+    public void QuienSoy(){
+        System.out.println("SOY DE AHORRO!");
+    }
+    
 }
