@@ -12,5 +12,6 @@ public class Banco {
     public static void main(String args[]){
         CuentaAhorro ca = new CuentaAhorro(1,"Carlos");
         System.out.println("nombre: " + ca.cliente);
+        
     }
 }

@@ -4,6 +4,7 @@
  */
 package Herencia;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -25,6 +26,8 @@ public class CuentaBancaria {
         codigo = cod;
         cliente = c;
         saldo = sm;
+        //inicio
+        fechaInicio = new Date();
     }
     
     public double getTasa(){
@@ -38,5 +41,16 @@ public class CuentaBancaria {
     public void retiro(double m){
         if( saldo > m )
             saldo -= m;
+    }
+    
+    public void generarIntereses(){
+        saldo += saldo * getTasa();
+    }
+    
+    @Override
+    public String toString(){
+        String dato = this.codigo + "-" + cliente +
+                "-" + saldo + " lps en saldo.";
+        return dato;
     }
 }
