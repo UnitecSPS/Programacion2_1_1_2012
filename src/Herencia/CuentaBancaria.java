@@ -30,6 +30,22 @@ public class CuentaBancaria {
         fechaInicio = new Date();
     }
     
+    public String getCliente() {
+        return cliente;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+    
     public double getTasa(){
         return 0.02;
     }
@@ -52,9 +68,5 @@ public class CuentaBancaria {
         String dato = this.codigo + "-" + cliente +
                 "-" + saldo + " lps en saldo.";
         return dato;
-    }
-    
-    public void QuienSoy(){
-        System.out.println("SOY PADRE!");
     }
 }
