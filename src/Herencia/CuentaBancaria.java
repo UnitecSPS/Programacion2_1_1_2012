@@ -11,12 +11,12 @@ import java.util.Date;
  *
  * @author Gotcha
  */
-public class CuentaBancaria {
+public abstract class CuentaBancaria {
     protected int codigo;
     protected String cliente;
     protected Date fechaInicio;
     protected double saldo;
-    protected static String BANCO;
+    public static String BANCO;
     
     static{
         BANCO = "BAC";
@@ -46,9 +46,7 @@ public class CuentaBancaria {
         return saldo;
     }
     
-    public double getTasa(){
-        return 0.02;
-    }
+    public abstract double getTasa();
     
     public void deposito(double m){
         saldo += m;

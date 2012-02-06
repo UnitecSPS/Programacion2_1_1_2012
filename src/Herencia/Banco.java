@@ -11,7 +11,7 @@ package Herencia;
 public class Banco {
     public static void main(String args[]){
         CuentaBancaria cas[] = new CuentaBancaria[3];
-        cas[0] = new CuentaBancaria(1,"Carlos",1000);
+        cas[0] = new CuentaAhorro(1,"Carlos");
         //upcasting 
         cas[1] = new CuentaAhorro(2,"Emilson");
         cas[2] = new CuentaCheques(3,"Eduardo");

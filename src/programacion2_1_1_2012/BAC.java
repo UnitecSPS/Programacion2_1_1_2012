@@ -19,7 +19,7 @@ public class BAC {
             
     public static void main(String args[]){
         int resp;
-        
+        System.out.println("Banco: " + CuentaBancaria.BANCO);
         do{
             System.out.println("1- Agregar Cuenta");
             System.out.println("2- Deposito");

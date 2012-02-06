@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author Gotcha
  */
 public class TweetDeck {
-    static CuentaRedSocial cuenta = null;
+    static CuentaRedSocial cuenta=null;
     static Scanner lea = new Scanner(System.in);
     
     public static void main(String args[]){

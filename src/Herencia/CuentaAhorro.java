@@ -45,5 +45,10 @@ public class CuentaAhorro extends CuentaBancaria {
         dato += " =CUENTA AHORRO= ";
         return dato;
     }
+
+    @Override
+    public double getTasa() {
+        return 0.015;
+    }
     
 }
