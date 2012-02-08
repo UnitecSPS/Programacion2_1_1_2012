@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author Gotcha
  */
-public class CuentaAhorro extends CuentaBancaria {
+public final class CuentaAhorro extends CuentaBancaria {
     private boolean activo;
     private Date ultimaModif;
     

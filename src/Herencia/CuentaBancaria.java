@@ -6,6 +6,7 @@ package Herencia;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -16,10 +17,12 @@ public abstract class CuentaBancaria {
     protected String cliente;
     protected Date fechaInicio;
     protected double saldo;
-    public static String BANCO;
+    public static final String BANCO = "BAC";
+    public final int test = 9;
     
     static{
-        BANCO = "BAC";
+        //Scanner lea = new Scanner(System.in);
+        //BANCO = lea.next();
     }
     
     public CuentaBancaria(int cod,String c, double sm){
@@ -30,19 +33,19 @@ public abstract class CuentaBancaria {
         fechaInicio = new Date();
     }
     
-    public String getCliente() {
+    public final String getCliente() {
         return cliente;
     }
 
-    public int getCodigo() {
+    public final int getCodigo() {
         return codigo;
     }
 
-    public Date getFechaInicio() {
+    public final Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public double getSaldo() {
+    public final double getSaldo() {
         return saldo;
     }
     
@@ -63,6 +66,8 @@ public abstract class CuentaBancaria {
     
     @Override
     public String toString(){
+        //final int x = 9;
+        
         String dato = this.codigo + "-" + cliente +
                 "-" + saldo + " lps en saldo.";
         return dato;

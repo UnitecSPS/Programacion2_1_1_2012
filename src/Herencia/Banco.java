@@ -28,5 +28,30 @@ public class Banco {
             ((CuentaCheques)cas[2]).printCheques();
         }
         
+        CuentaBancaria ban = new CuentaBancaria(5,"ll",100) {
+
+            int x = 0;
+            @Override
+            public double getTasa() {
+                test();
+                return 0.1;
+            }
+            
+            public void test(){
+                System.out.println("TEST " + x);
+            }
+        };
+        
+        CuentaBancaria ban2 = new CuentaBancaria(5,"ll",100) {
+
+            @Override
+            public double getTasa() {
+                return 0.5;
+            }
+        };
+        
+        System.out.println("tasa: " + ban.getTasa());
+        System.out.println("tasa: " + ban2.getTasa());
+        
     }
 }
