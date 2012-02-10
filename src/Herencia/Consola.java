@@ -8,22 +8,31 @@ package Herencia;
  *
  * @author Gotcha
  */
+enum TipoConsola{
+    XBOX(5),WII(2),PS3(10);
+    public int prestigio;
+    
+    TipoConsola(int p){
+        prestigio = p;
+    }
+}
+
 public class Consola {
-    private int tipo;
-    public static final int TIPO_XBOX = 2;
+    private TipoConsola tipo;
+    /*public static final int TIPO_XBOX = 2;
     public static final int TIPO_WII = 3;
-    public static final int TIPO_PS3 = 1;
+    public static final int TIPO_PS3 = 1;*/
     
     public void impTipo(){
-        if( tipo == TIPO_XBOX){
+        if( tipo == TipoConsola.XBOX){
             //xbox
             System.out.println("XBOX");
         }
-        else if( tipo == TIPO_WII){
+        else if( tipo == TipoConsola.WII){
             //wii
             System.out.println("WII");
         }
-        else if( tipo == TIPO_PS3){
+        else if( tipo == TipoConsola.PS3){
             //ps3
             System.out.println("PS3");
         }
@@ -33,15 +42,15 @@ public class Consola {
     }
     
     public double getPrecio(){
-        if( tipo == TIPO_XBOX){
+        if( tipo == TipoConsola.XBOX){
             //xbox
             return 299;
         }
-        else if( tipo == TIPO_WII){
+        else if( tipo == TipoConsola.WII){
             //wii
             return 199;
         }
-        else if( tipo == TIPO_PS3){
+        else if( tipo == TipoConsola.PS3){
             //ps3
             return 320;
         }
