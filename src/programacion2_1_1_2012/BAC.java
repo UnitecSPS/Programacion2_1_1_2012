@@ -48,26 +48,34 @@ public class BAC {
     }
 
     private static void agregarCuenta() {
-        System.out.println("Tipo de Cuenta? A (ahorro) o C (Cheque): ");
-        char tipo = lea.next().charAt(0);
-        
-        System.out.println("Codigo: ");
-        int n = lea.nextInt();
-        System.out.println("Nombre: ");
-        String no = lea.next();
-        
-        switch( tipo ){
-            case 'A':
-            case 'a':
-                cuentas.add(new CuentaAhorro(n,no));
+        do{
+            try{
+                System.out.println("Tipo de Cuenta? A (ahorro) o C (Cheque): ");
+                char tipo = lea.next().charAt(0);
+
+                System.out.println("Codigo: ");
+                int n = lea.nextInt();
+                System.out.println("Nombre: ");
+                String no = lea.next();
+                
+                switch( tipo ){
+                    case 'A':
+                    case 'a':
+                        cuentas.add(new CuentaAhorro(n,no));
+                        break;
+                    case 'C':
+                    case 'c':
+                        cuentas.add(new CuentaCheques(n,no));
+                        break;
+                    default:
+                        throw new CuentaTipoInvalidaException(tipo);
+                }
                 break;
-            case 'C':
-            case 'c':
-                cuentas.add(new CuentaCheques(n,no));
-                break;
-            default:
-                System.out.println("TIPO INVALIDO");
-        }
+            }
+            catch(CuentaTipoInvalidaException e){
+                System.out.println("ERROR: " + e.getMessage());
+            }
+        }while(true);
     }
 
     private static void depositos() {
