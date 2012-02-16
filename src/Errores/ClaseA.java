@@ -21,6 +21,7 @@ public class ClaseA {
             throw new NegativeNumberException("EXPONENTE NEGATIVO");
         }  
         int pot=1;
+        
         for(int p=1; p <= e; p++ )
             pot *= b;
         return pot;
