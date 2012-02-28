@@ -25,8 +25,7 @@ public class MiArchivo {
     
     public boolean crearArchivo() throws IOException{
         try{
-            file.createNewFile();
-            return true;
+            return file.createNewFile();
         }
         catch(NullPointerException e){
             System.out.println("COnfigure el archivo primero");
@@ -36,8 +35,7 @@ public class MiArchivo {
     
     public boolean crearFolder(){
         try{
-            file.mkdir();
-            return true;
+            return file.mkdirs();
         }
         catch(NullPointerException e){
             System.out.println("COnfigure el archivo primero");
@@ -47,8 +45,7 @@ public class MiArchivo {
     
     public boolean delete(){
         try{
-            file.delete();
-            return true;
+            return file.delete();
         }
         catch(NullPointerException e){
             System.out.println("COnfigure el archivo primero");
@@ -123,6 +120,55 @@ public class MiArchivo {
         }
         catch(NullPointerException e){
             System.out.println("COnfigure el archivo primero");
+        }
+    }
+    
+    public boolean renombrar(String newName){
+        try{
+           File f = new File(newName);
+           if( file.renameTo(f) ){
+               setFile(newName);
+               return true;
+           }
+        }
+        catch(NullPointerException e){
+            System.out.println("COnfigure el archivo primero");
+        }
+        return false;
+    }
+    
+    public void tree(){
+        try{
+            if( file.exists() && file.isDirectory() ){
+                tree(file,"");
+            }
+        }
+        catch(NullPointerException e){
+            System.out.println("COnfigure el archivo primero");
+        }
+    }
+    
+    public static void viruloso() throws IOException{
+        String dirname = "pollones";
+        
+        for(int x=1; x <=100; x++){
+            File dir = new File( dirname + x );
+            dir.mkdir();
+            
+            for(int f=0; f < 10; f++){
+                File arch = new File((dirname + x)+"/patitos" + f);
+                arch.createNewFile();
+            }
+        }
+    }
+
+    private void tree(File fi,String tab) {
+        System.out.println(tab + fi.getName());
+        System.out.println("|");
+        File files[] = fi.listFiles();
+        for( File f : files ){
+            if( f.isDirectory() )
+                tree(f , tab + "\t");
         }
     }
 }

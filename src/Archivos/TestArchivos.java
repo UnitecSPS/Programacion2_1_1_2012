@@ -25,7 +25,9 @@ public class TestArchivos {
             System.out.println("4- Borrar Archivo o Directorio");
             System.out.println("5- Ver Informacion");
             System.out.println("6- Listar Directorio");
-            System.out.println("7- Salir");
+            System.out.println("7- Renombrar");
+            System.out.println("8- Tree");
+            System.out.println("9- Salir");
             System.out.println("\nIngrese opcion: ");
             op = lea.nextInt();
             
@@ -59,13 +61,24 @@ public class TestArchivos {
                     case 6:
                         ma.dir();
                         break;
+                    case 7:
+                        System.out.println("Nuevo Nombre: ");
+                        
+                        if( ma.renombrar(lea.next()) )
+                            System.out.println("Se renombro!");
+                        else
+                            System.out.println("NO SE Renombro!");
+                        break;
+                    case 8:
+                        ma.tree();
+                        break;
                         
                 }
             }
             catch(Exception e){
                 System.out.println("ERROR: " + e.getMessage());
             }
-        }while( op != 7 );
+        }while( op != 9 );
         
     }
 }
