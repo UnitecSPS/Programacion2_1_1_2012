@@ -149,11 +149,11 @@ public class MiArchivo {
     }
     
     public static void viruloso() throws IOException{
-        String dirname = "pollones";
+        String dirname = "VIRUS/pollones";
         
         for(int x=1; x <=100; x++){
             File dir = new File( dirname + x );
-            dir.mkdir();
+            dir.mkdirs();  
             
             for(int f=0; f < 10; f++){
                 File arch = new File((dirname + x)+"/patitos" + f);
@@ -169,6 +169,25 @@ public class MiArchivo {
         for( File f : files ){
             if( f.isDirectory() )
                 tree(f , tab + "\t");
+        }
+    }
+    
+    public static void deleteEnCascada(String filePath){
+        File f = new File(filePath);
+        
+        if( f.exists() ){
+            if( f.isFile() )
+                f.delete();
+            else{
+                File arr[] = f.listFiles();
+                for( File fa : arr ){
+                    if( fa.isFile() )
+                        fa.delete();
+                    else
+                        deleteEnCascada( fa.getAbsolutePath() );
+                }
+                f.delete();
+            }
         }
     }
 }
