@@ -7,6 +7,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Date;
 
 /**
  *
@@ -109,4 +110,62 @@ public class AutoControl {
         
         return -1;
     }
+    
+    
+    public void updatePrecio(int codCarro, double prec) throws IOException{
+        long pos = buscarAuto(codCarro);
+        
+        if( pos > -1 ){
+            //lo encontre
+            ramAuto.seek(pos);
+            ramAuto.readInt();
+            String s = ramAuto.readUTF();
+            ramAuto.readBoolean();
+            
+            ramAuto.writeDouble(prec);
+            System.out.println("Se actualizo el precio de " + s);
+        }
+        else
+            System.out.println("No se encontro ese registro");
+    }
+    
+    private double crearFactura(int cc,double p,String c) throws IOException{
+        ramFacturas.seek( ramFacturas.length() );
+        
+        int codf = getCodigoFactura();
+        System.out.println("No. Factura " + codf);
+        ramFacturas.writeInt( codf );
+        ramFacturas.writeInt(cc);
+        Date d = new Date();
+        System.out.println(d);
+        ramFacturas.writeLong( d.getTime() );
+        double imp = p * 0.12;
+        double total = p + imp;
+        ramFacturas.writeDouble( total );
+        ramFacturas.writeUTF(c);
+        return total;
+    }
+    
+    public boolean venderAuto(int codcarro,String cliente) throws IOException{
+        long pos = buscarAuto(codcarro);
+        
+        if( pos > -1 ){
+            ramAuto.seek(pos);
+            ramAuto.readInt();
+            String s = ramAuto.readUTF();
+            ramAuto.readBoolean();
+            
+            double tot= crearFactura(codcarro, ramAuto.readDouble(), cliente);
+            
+            ramAuto.readInt();
+            ramAuto.writeBoolean(false); // ya no esta disponible
+            
+            System.out.println("El carro: " +  s + " Vendido a " +
+                    cliente + " por Lps. " + tot);
+            return true;
+        }
+        
+        return false;
+    }
+    
 }

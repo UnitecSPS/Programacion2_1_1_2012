@@ -23,7 +23,9 @@ public class EligeTuCarro {
             System.out.println("1- Ingrese Auto");
             System.out.println("2- Imprimir Autos Disponibles");
             System.out.println("3- Buscar Auto");
-            System.out.println("4- Salir");
+            System.out.println("4- Actualizar Precio");
+            System.out.println("5- Vender Auto");
+            System.out.println("6- Salir");
             System.out.print("\nEscoja opcion: ");
             op = lea.nextInt();
             
@@ -52,13 +54,31 @@ public class EligeTuCarro {
                         else
                             System.out.println("No existe o NO esta disponible");
                         break;
+                    case 4:
+                        System.out.print("Ingrese codigo: ");
+                        int cod = lea.nextInt();
+                        System.out.print("Precio Nuevo: ");
+                        double pre = lea.nextDouble();
+                        at.updatePrecio(cod, pre);
+                        break;
+                    case 5:
+                        System.out.print("Cod Carro: ");
+                        cod = lea.nextInt();
+                        System.out.print("Cliente: ");
+                        String cli = lea.next();
+                        
+                        if( at.venderAuto(cod, cli) )
+                            System.out.println("FACTURA CREADA");
+                        else
+                            System.out.println("FACTURA FALLO");
+                        break;
                         
                 }
             }
             catch(Exception e ){
                 System.out.println("Error: " + e.getMessage());
             }
-        }while( op != 4 );
+        }while( op != 6 );
         
     }
 }
