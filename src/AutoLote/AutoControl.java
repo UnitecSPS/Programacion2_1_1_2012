@@ -7,6 +7,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -166,6 +167,90 @@ public class AutoControl {
         }
         
         return false;
+    }
+    
+    public void imprimirFacturas() throws IOException{
+        ramFacturas.seek(0);
+        while( ramFacturas.getFilePointer() < ramFacturas.length() ){
+            int cf = ramFacturas.readInt();
+            int cc = ramFacturas.readInt();
+            long fecha = ramFacturas.readLong();
+            double pre = ramFacturas.readDouble();
+            String cliente = ramFacturas.readUTF();
+            
+            System.out.println(cf + " - " + new Date(fecha));
+            System.out.println("Se vendio el carro " + cc + " a " + cliente);
+            System.out.println("TOTAL: " + pre + "\n");
+        }
+    }
+    
+    public double montoGenerado(Date inicio,Date fin)throws IOException{
+        ramFacturas.seek(0);
+        double monto = 0;
+        while( ramFacturas.getFilePointer() < ramFacturas.length() ){
+            ramFacturas.readInt();
+            ramFacturas.readInt();
+            Date fecha = new Date( ramFacturas.readLong());
+            double pre = ramFacturas.readDouble();
+            ramFacturas.readUTF();
+            
+            if( fecha.after(inicio) && fecha.before(fin) ){
+                // o ==> fecha.getTime() >= inicio.getTime() && fecha.getTime() <= fin.getTime()
+                monto += pre;
+            }
+        }
+        
+        return monto;
+    }
+    
+    public boolean updateFactura(int codf, double prec)throws IOException{
+        ramFacturas.seek(0);
+        while( ramFacturas.getFilePointer() < ramFacturas.length() ){
+            int cf = ramFacturas.readInt();
+            ramFacturas.readInt();
+            
+            if( cf == codf ){
+                //guardar la nueva fecha
+                Date now = new Date();
+                ramFacturas.writeLong( now.getTime() );
+                //actualizo precio
+                ramFacturas.writeDouble(prec);
+                //me voy!
+                return true;
+            }
+            else{
+                //solo leo para q avance                
+                ramFacturas.readLong();
+                ramFacturas.readDouble();
+                ramFacturas.readUTF();
+            }
+        }
+        
+        return false;
+    }
+    
+    public void listarCarros(Date fecha) throws IOException{
+        ramAuto.seek(0);
+        Calendar c = Calendar.getInstance();
+        c.setTime(fecha);
+        int aniof = c.get(Calendar.YEAR);
+            
+        while( ramAuto.getFilePointer() < ramAuto.length() ){
+            int cod = ramAuto.readInt();
+            String d = ramAuto.readUTF();
+            boolean m = ramAuto.readBoolean();
+            double prec = ramAuto.readDouble();
+            int anio = ramAuto.readInt();
+           
+            //la otra opcion es pasar los MILISEGUNDOS de la fecha a ANIO!
+            //fecha.getTime()/(1000*60*60*24*365)
+            System.out.println("probando...aniof: " + aniof);
+            
+            if( ramAuto.readBoolean() && anio == aniof ){
+                System.out.println(cod + "-" + d + (m ? " Mecanico " : " Automatico ") +
+                        " Lps " + prec + " anio " + anio);
+            }
+        }
     }
     
 }
