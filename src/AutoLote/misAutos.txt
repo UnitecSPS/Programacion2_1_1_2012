@@ -1,0 +1,4 @@
+	LISTA DE CARROS DISPONIBLES
+	-------------------------
+1 - Mitsubishi_Lancer_Azul MECANICO  Lps 125000.0 Anio: 2008
+4 - Mazda_3_rojo AUTOMATICO  Lps 350000.0 Anio: 2011

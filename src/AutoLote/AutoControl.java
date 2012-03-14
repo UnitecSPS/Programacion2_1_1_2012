@@ -5,6 +5,7 @@
 //package AutoLote;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Calendar;
@@ -251,6 +252,30 @@ public class AutoControl {
                         " Lps " + prec + " anio " + anio);
             }
         }
+    }
+    
+    public void exportCarrosDisponibles(String txtFile) throws IOException{
+        ramAuto.seek(0);
+        FileWriter fw = new FileWriter(txtFile);
+        
+        fw.write("\tLISTA DE CARROS DISPONIBLES\n\t-------------------------\n");
+        
+        while(ramAuto.getFilePointer() < ramAuto.length()){
+           int cod = ramAuto.readInt();
+           String d = ramAuto.readUTF();
+           boolean m = ramAuto.readBoolean();
+           double prec = ramAuto.readDouble();
+           int anio = ramAuto.readInt();
+           
+           if( ramAuto.readBoolean() ){
+               String dato = cod + " - " + d + (m ? " MECANICO " : " AUTOMATICO ") +
+                       " Lps " + prec + " Anio: " + anio;
+               fw.write(dato + "\n");
+           }
+        }
+        
+        fw.close();
+        
     }
     
 }

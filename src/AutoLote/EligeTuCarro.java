@@ -31,7 +31,8 @@ public class EligeTuCarro {
             System.out.println("7- Monto Generado");
             System.out.println("8- Actualizar Factura");
             System.out.println("9- Listar Carros por anio");
-            System.out.println("10- Salir");
+            System.out.println("10- Exportar Carros Disponibles");
+            System.out.println("11- Salir");
             System.out.print("\nEscoja opcion: ");
             op = lea.nextInt();
             
@@ -109,13 +110,17 @@ public class EligeTuCarro {
                         c.set(lea.nextInt(), lea.nextInt(), lea.nextInt());
                         at.listarCarros(c.getTime());
                         break;
+                    case 10:
+                        System.out.print("Ingrese nombre de txt: ");
+                        at.exportCarrosDisponibles(lea.next());
+                        break;
                         
                 }
             }
             catch(Exception e ){
                 System.out.println("Error: " + e.getMessage());
             }
-        }while( op != 10 );
+        }while( op != 11 );
         
     }
 }
