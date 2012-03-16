@@ -1,4 +1,6 @@
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 /*
@@ -25,7 +27,12 @@ public class EligeTuCarro {
             System.out.println("3- Buscar Auto");
             System.out.println("4- Actualizar Precio");
             System.out.println("5- Vender Auto");
-            System.out.println("6- Salir");
+            System.out.println("6- Listar Facturas");
+            System.out.println("7- Monto Generado");
+            System.out.println("8- Actualizar Factura");
+            System.out.println("9- Listar Carros por anio");
+            System.out.println("10- Exportar Carros Disponibles");
+            System.out.println("11- Salir");
             System.out.print("\nEscoja opcion: ");
             op = lea.nextInt();
             
@@ -72,13 +79,48 @@ public class EligeTuCarro {
                         else
                             System.out.println("FACTURA FALLO");
                         break;
+                    case 6:
+                        at.imprimirFacturas();
+                        break;
+                    case 7:
+                        Calendar c = Calendar.getInstance();
+                        //inicio
+                        c.set(lea.nextInt(), lea.nextInt(), lea.nextInt());
+                        Date i = c.getTime();
+                        //fin
+                        c.set(lea.nextInt(), lea.nextInt(), lea.nextInt());
+                        Date f = c.getTime();
+                        
+                        System.out.println("Se genero: " + at.montoGenerado(i, f));
+                        break;
+                    case 8:
+                        System.out.println("Cod Factura: ");
+                        int cf = lea.nextInt();
+                        System.out.println("Nuevo Monto: ");
+                        double m = lea.nextDouble();
+                        
+                        if( at.updateFactura(cf, m))
+                            System.out.println("Se actualizo con exito");
+                        else
+                            System.out.println("No existe factura");
+                        break;
+                    case 9:
+                        //fecha
+                        c = Calendar.getInstance();
+                        c.set(lea.nextInt(), lea.nextInt(), lea.nextInt());
+                        at.listarCarros(c.getTime());
+                        break;
+                    case 10:
+                        System.out.print("Ingrese nombre de txt: ");
+                        at.exportCarrosDisponibles(lea.next());
+                        break;
                         
                 }
             }
             catch(Exception e ){
                 System.out.println("Error: " + e.getMessage());
             }
-        }while( op != 6 );
+        }while( op != 11 );
         
     }
 }

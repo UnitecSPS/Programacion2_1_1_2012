@@ -1,0 +1,3 @@
+aquii estoy probando la clase Filereader
+se deberia de escribir en pantalla todo esto que yo he escrito
+sino Hector baila el pollo
